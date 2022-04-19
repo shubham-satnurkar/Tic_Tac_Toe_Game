@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+#ticTacToe input[type="radio"] {
+    font-size: 1rem;
+}
+
+#ticTacToe .box__board {
+    width: 50vmin;
+    height: 50vmin;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#ticTacToe .box__board .tile {
+    margin: 5px;
+    position: relative;
+}
+
+.tile label,
+.tile div {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.10);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+
+}
+
+.tile div {
+    display: none;
+    overflow: hidden;
+}
+
+/* Indexing the tiles by input clicked */
+
+label[for$='-x'] {
+    z-index: 1;
+}
+
+input:checked~#board label[for$='-o'] {
+    z-index: 2;
+}
+
+input:checked~input:checked~#board label[for$='-x'] {
+    z-index: 3;
+}
+
+input:checked~input:checked~input:checked~#board label[for$='-o'] {
+    z-index: 4;
+}
+
+input:checked~input:checked~input:checked~input:checked~#board label[for$='-x'] {
+    z-index: 5;
+}
+
+input:checked~input:checked~input:checked~input:checked~input:checked~#board label[for$='-o'] {
+    z-index: 6;
+}
+
+input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#board label[for$='-x'] {
+    z-index: 7;
+}
+
+input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#board label[for$='-o'] {
+    z-index: 8;
+}
+
+input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~input:checked~#board label[for$='-x'] {
+    z-index: 9;
+}
+
+/* For hiding the tile labels on click input radio button by id */
+input[id*='-0-']:checked~#board label[for*='-0-'],
+input[id*='-1-']:checked~#board label[for*='-1-'],
+input[id*='-2-']:checked~#board label[for*='-2-'],
+input[id*='-3-']:checked~#board label[for*='-3-'],
+input[id*='-4-']:checked~#board label[for*='-4-'],
+input[id*='-5-']:checked~#board label[for*='-5-'],
+input[id*='-6-']:checked~#board label[for*='-6-'],
+input[id*='-7-']:checked~#board label[for*='-7-'],
+input[id*='-8-']:checked~#board label[for*='-8-'] {
+    display: none;
+}
+
+/* For showing the empty div on click input radio button by id */
+input[id*='-0-']:checked~#board #tile-0 div,
+input[id*='-1-']:checked~#board #tile-1 div,
+input[id*='-2-']:checked~#board #tile-2 div,
+input[id*='-3-']:checked~#board #tile-3 div,
+input[id*='-4-']:checked~#board #tile-4 div,
+input[id*='-5-']:checked~#board #tile-5 div,
+input[id*='-6-']:checked~#board #tile-6 div,
+input[id*='-7-']:checked~#board #tile-7 div,
+input[id*='-8-']:checked~#board #tile-8 div {
+    display: block;
+}
+
+/* Adding content X in empty div when it clicked */
+input[id*='-0-x']:checked~#board #tile-0 div::before,
+input[id*='-1-x']:checked~#board #tile-1 div::before,
+input[id*='-2-x']:checked~#board #tile-2 div::before,
+input[id*='-3-x']:checked~#board #tile-3 div::before,
+input[id*='-4-x']:checked~#board #tile-4 div::before,
+input[id*='-5-x']:checked~#board #tile-5 div::before,
+input[id*='-6-x']:checked~#board #tile-6 div::before,
+input[id*='-7-x']:checked~#board #tile-7 div::before,
+input[id*='-8-x']:checked~#board #tile-8 div::before {
+    content: 'X';
+    background-color: #ff4500;
+    color: #000;
+}
+
+/* Adding content O in empty div when it clicked */
+input[id*='-0-o']:checked~#board #tile-0 div::before,
+input[id*='-1-o']:checked~#board #tile-1 div::before,
+input[id*='-2-o']:checked~#board #tile-2 div::before,
+input[id*='-3-o']:checked~#board #tile-3 div::before,
+input[id*='-4-o']:checked~#board #tile-4 div::before,
+input[id*='-5-o']:checked~#board #tile-5 div::before,
+input[id*='-6-o']:checked~#board #tile-6 div::before,
+input[id*='-7-o']:checked~#board #tile-7 div::before,
+input[id*='-8-o']:checked~#board #tile-8 div::before {
+    content: 'O';
+    background-color: #004974;
+    ;
+    color: #000;
+}
+
+.tile label:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.tile label::before,
+.tile div::before {
+    color: #000;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    padding: 100%;
+    font-weight: bolder;
+}
+
+/* .tile label[for$='-o']:hover::before {
+    content: "O";
+}
+
+.tile label[for$='-x']:hover::before {
+    content: "X";
+} */
+
+#tile-0 {grid-column: 1; grid-row: 1;}
+#tile-1 {grid-column: 2; grid-row: 1;}
+#tile-2 {grid-column: 3; grid-row: 1;}
+
+#tile-3 {grid-column: 1; grid-row: 2;}
+#tile-4 {grid-column: 2; grid-row: 2;}
+#tile-5 {grid-column: 3; grid-row: 2;}
+
+#tile-6 {grid-column: 1; grid-row: 3;}
+#tile-7 {grid-column: 2; grid-row: 3;}
+#tile-8 {grid-column: 3; grid-row: 3;}
+
+/* Popup message for win game or tie game */
+#end{
+    background-color: rgba(255, 255, 255, .8);
+    box-shadow:  0 0 10px rgba(0, 0, 0, .5);
+    position: fixed; top: 0; left: 0;right: 0;bottom: 0;
+    display: none;
+}
+.center{
+    width: 50vmin;
+    height: 50vmin;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#message{
+    text-align: center;font-size: 2.5rem;
+    line-height: 3rem;font-weight: bold;
+}
+#message::before{content: "Tied Game!";}
+#message input{
+    color: #fff;background-color: #000;
+    padding: 10px 30px; border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* On completion of the game popup show  tied message*/
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #end,
+#box-0-x:checked ~ #box-1-x:checked ~ #box-2-x:checked ~ #end,
+#box-3-x:checked ~ #box-4-x:checked ~ #box-5-x:checked ~ #end,
+#box-6-x:checked ~ #box-7-x:checked ~ #box-8-x:checked ~ #end,
+#box-0-x:checked ~ #box-3-x:checked ~ #box-6-x:checked ~ #end,
+#box-1-x:checked ~ #box-4-x:checked ~ #box-7-x:checked ~ #end,
+#box-2-x:checked ~ #box-5-x:checked ~ #box-8-x:checked ~ #end,
+#box-0-x:checked ~ #box-4-x:checked ~ #box-8-x:checked ~ #end,
+#box-2-x:checked ~ #box-4-x:checked ~ #box-6-x:checked ~ #end,
+
+#box-0-o:checked ~ #box-1-o:checked ~ #box-2-o:checked ~ #end,
+#box-3-o:checked ~ #box-4-o:checked ~ #box-5-o:checked ~ #end,
+#box-6-o:checked ~ #box-7-o:checked ~ #box-8-o:checked ~ #end,
+#box-0-o:checked ~ #box-3-o:checked ~ #box-6-o:checked ~ #end,
+#box-1-o:checked ~ #box-4-o:checked ~ #box-7-o:checked ~ #end,
+#box-2-o:checked ~ #box-5-o:checked ~ #box-8-o:checked ~ #end,
+#box-0-o:checked ~ #box-4-o:checked ~ #box-8-o:checked ~ #end,
+#box-2-o:checked ~ #box-4-o:checked ~ #box-6-o:checked ~ #end{
+    display: block;
+}
+
+
+/* Player X winning message */
+#box-0-x:checked ~ #box-1-x:checked ~ #box-2-x:checked ~ #end #message::before,
+#box-3-x:checked ~ #box-4-x:checked ~ #box-5-x:checked ~ #end #message::before,
+#box-6-x:checked ~ #box-7-x:checked ~ #box-8-x:checked ~ #end #message::before,
+#box-0-x:checked ~ #box-3-x:checked ~ #box-6-x:checked ~ #end #message::before,
+#box-1-x:checked ~ #box-4-x:checked ~ #box-7-x:checked ~ #end #message::before,
+#box-2-x:checked ~ #box-5-x:checked ~ #box-8-x:checked ~ #end #message::before,
+#box-0-x:checked ~ #box-4-x:checked ~ #box-8-x:checked ~ #end #message::before,
+#box-2-x:checked ~ #box-4-x:checked ~ #box-6-x:checked ~ #end #message::before{
+    content: "Player X  Won!";
+}
+
+/* Player O winning message */
+#box-0-o:checked ~ #box-1-o:checked ~ #box-2-o:checked ~ #end #message::before,
+#box-3-o:checked ~ #box-4-o:checked ~ #box-5-o:checked ~ #end #message::before,
+#box-6-o:checked ~ #box-7-o:checked ~ #box-8-o:checked ~ #end #message::before,
+#box-0-o:checked ~ #box-3-o:checked ~ #box-6-o:checked ~ #end #message::before,
+#box-1-o:checked ~ #box-4-o:checked ~ #box-7-o:checked ~ #end #message::before,
+#box-2-o:checked ~ #box-5-o:checked ~ #box-8-o:checked ~ #end #message::before,
+#box-0-o:checked ~ #box-4-o:checked ~ #box-8-o:checked ~ #end #message::before,
+#box-2-o:checked ~ #box-4-o:checked ~ #box-6-o:checked ~ #end #message::before{
+    content: "Player O  Won!";
+}
